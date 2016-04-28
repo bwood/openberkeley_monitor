@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function openberkeley_monitor_menu() {
+  $items = array();
+
+  $items['admin/config/services/openberkeley-monitor'] = array(
+    'type' => MENU_NORMAL_ITEM,
+    'title' => 'Open Berkeley Monitor',
+    'description' => 'Test OB Monitor.',
+    'access arguments' => array('administer logs http client'),
+    'page callback' => 'openberkeley_monitor_test_page',
+  );
+
+  return $items;
+}
+
+function openberkeley_monitor_test_page() {
+
+  drupal_set_message("logging test data.", "status");
+
+  $log_message = array(
+    'timestamp' => time(),
+    'type' => "monitor",
+    'ip' => "ip variable",
+    'request_uri' => "admin/config/services/openberkeley-monitor",
+    'referer' => "None",
+    'uid' => "1",
+    'link' => "http://openucb-1076-logshttp.kbox/admin/structure/features",
+    'message' => "Features override found.",
+    'severity' => WATCHDOG_ALERT,
+  );
+
+  openberkeley_monitor_watchdog($log_message);
+
+  return "";
+}
+
+/**
+ * Implements hook_watchdog().
+ *
+ * Register watchdog events.
+ */
+function openberkeley_monitor_watchdog(array $log_entry) {
+
+  logs_http_register_event($log_entry);
+}
