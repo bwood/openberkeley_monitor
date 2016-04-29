@@ -2,5 +2,13 @@ name = openberkeley_monitor
 description = "Monitor things in OB"
 core = "7.x"
 version = "7.x-0.1"
+project = "openberkeley_monitor"
+
+dependencies[] = logs_http
+dependencies[] = monitoring
+
+; need this because it has class declaration?
+files[] = Sensor/Sensors/SensorFeaturesOverrides.php
+
 
 

@@ -47,3 +47,4 @@ function openberkeley_monitor_watchdog(array $log_entry) {
 
   logs_http_register_event($log_entry);
 }
+
