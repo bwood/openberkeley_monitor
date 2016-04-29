@@ -123,9 +123,11 @@ class SensorFeaturesOverrides extends Sensor {
     //TODO: needs review
     if (count($overridden)) {
       $sensor_result->addStatusMessage('Overridden features: @overridden', array('@overridden' => implode(', ', $overridden)));
+      $sensor_result->setStatus(SensorResultInterface::STATUS_WARNING);
     }
     else {
       $sensor_result->addStatusMessage("No features in overridden state.");
+      $sensor_result->setStatus(SensorResultInterface::STATUS_OK);
     }
 
   }
